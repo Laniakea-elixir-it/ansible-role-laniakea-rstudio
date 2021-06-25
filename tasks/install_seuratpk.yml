@@ -1,6 +1,4 @@
 ---
-
-
 - name: install requirements for Seurat
   package: 
     name:
