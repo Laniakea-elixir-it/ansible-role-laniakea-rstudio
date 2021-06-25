@@ -9,6 +9,7 @@
       - openssl-devel 
       - libcurl-devel
       - hdf5-devel
+      - libpng-devel
     use: yum
 
 - name: install seurat package
