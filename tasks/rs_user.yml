@@ -6,7 +6,7 @@
     dest: /opt/pwd_generator.py
     mode: 777
 
-- name: Create galaxy db random passwd
+- name: Create rstudio user random passwd
   command: "/opt/pwd_generator.py -l 8 -p "
   register: random_pwd
 
