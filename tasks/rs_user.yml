@@ -1,6 +1,7 @@
 ---
 
 - name: Create rstudio user random password
+  set_fact:
     rstudio_admin_password: "{{ lookup('password', '/dev/null length=50') }}"
   no_log: True
   when: not retrieve_passphrase_from_vault
