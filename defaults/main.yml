@@ -9,3 +9,5 @@ rstudio_port: 8080
 R_VERSION: 4.0.0 
 
 role_debug: false
+
+retrieve_passphrase_from_vault: false
