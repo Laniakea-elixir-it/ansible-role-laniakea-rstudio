@@ -2,7 +2,7 @@
 
 - name: Create rstudio user random password
   set_fact:
-    rstudio_admin_password: "{{ lookup('password', '/dev/null length=50') }}"
+    rstudio_admin_password: "{{ lookup('password', '/dev/null length=8') }}"
   no_log: True
   when: not retrieve_passphrase_from_vault
 
@@ -10,7 +10,7 @@
   user: 
     name: "{{ username }}"
     state: present
-    password: "{{ rstudio_admin_password | string |  password_hash('sha512') }}"
+    password: "{{ rstudio_admin_password | string | password_hash('sha512') }}"
     update_password: on_create
   no_log: True
   when: not retrieve_passphrase_from_vault
@@ -28,7 +28,7 @@
   user:
     name: "{{ username }}"
     state: present
-    password: '{{ vault_secrets.data.admin_password }}'
+    password: "{{ vault_secrets.data.admin_password | string | password_hash('sha512') }}"
     update_password: on_create
   no_log: True
   when: retrieve_passphrase_from_vault
