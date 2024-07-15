@@ -1,7 +1,5 @@
 ---
-
-
-- name: install requirements for Seurat
+- name: Install requirements for Seurat
   dnf: 
     name:
       - "@Development tools" 
@@ -9,24 +7,18 @@
       - openssl-devel 
       - libcurl-devel
       - hdf5-devel
-      - centos-release-scl-rh
       - libpng-devel
 
-- name: install new c++ compiler for Seurat
-  dnf: 
-    name: devtoolset-11
-
-- name: save $PATH variable of user root
+- name: Save $PATH variable of user root
   debug:
     msg: "'{{ lookup('env', 'PATH') }}'"
   become: yes
   become_user: root
   register: path_bin
 
-- name: remove '' from $PATH
+- name: Remove '' from $PATH
   shell: echo {{ path_bin.msg }} |  tr -d \'
   register: path_bin
-
      
 - name: Creating .Renviron file to point to the new gcc
   copy:
@@ -34,7 +26,7 @@
     content: |
       PATH=/opt/rh/devtoolset-11/root/usr/bin:{{ path_bin.stdout }}
 
-- name: install seurat package
+- name: Install seurat package
   command: R -e "install.packages('Seurat', repos='https://cran.rstudio.com/')" --no-save 
   become: yes
   become_user: root
