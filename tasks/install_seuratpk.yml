@@ -2,7 +2,7 @@
 
 
 - name: install requirements for Seurat
-  package: 
+  dnf: 
     name:
       - "@Development tools" 
       - libxml2-devel
@@ -11,10 +11,9 @@
       - hdf5-devel
       - centos-release-scl-rh
       - libpng-devel
-    use: yum
 
 - name: install new c++ compiler for Seurat
-  package: 
+  dnf: 
     name: devtoolset-11
 
 - name: save $PATH variable of user root
