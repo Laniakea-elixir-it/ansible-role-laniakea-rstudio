@@ -31,6 +31,7 @@
     name:
       - "/opt/R-{{ R_VERSION }}-1-1.x86_64.rpm"
     enablerepo: crb
+    disable_gpg_check: yes
     state: present
 
 - name: symlink to bin
