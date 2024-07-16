@@ -1,14 +1,4 @@
 ---
-- name: Install requirements for Seurat
-  dnf: 
-    name:
-      - "@Development tools" 
-      - libxml2-devel
-      - openssl-devel 
-      - libcurl-devel
-      - hdf5-devel
-      - libpng-devel
-
 - name: Save $PATH variable of user root
   debug:
     msg: "'{{ lookup('env', 'PATH') }}'"
