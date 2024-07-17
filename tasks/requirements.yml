@@ -15,7 +15,7 @@
       - libpng-devel
       - fontconfig-devel
       - fribidi-devel
-      - harbfuzz-devel
+      - harfbuzz-devel
       - freetype-devel
       - libpng-devel
       - libtiff-devel
