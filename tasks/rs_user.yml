@@ -5,11 +5,11 @@
   no_log: True
   when: user_password is defined
 
-    #- name: Alternatively create rstudio user random pasexternally.
-    #  set_fact:
-    #    rstudio_admin_password: "{{ lookup('password', '/dev/null length=10') }}"
-    #  no_log: True
-    #  when: admin_password is defined and admin_password == 'random'
+- name: Alternatively create rstudio user random pasexternally.
+  set_fact:
+    rstudio_user_password: "{{ lookup('password', '/dev/null length=10') }}"
+  no_log: True
+  when: user_password is defined and user_password == 'random'
 
 - name: Create rstudio user and set rstudio pssword
   user: 
@@ -19,14 +19,14 @@
     update_password: on_create
   no_log: True
 
-    #- name: save the random password on file
-    #  copy:
-    #    content: '{{ rstudio_admin_password }}'
-    #    dest: /home/{{ username }}/pssw.txt
-    #  become: yes
-    #  become_user: "{{ username }}"
-    #  no_log: True
-    #  when: admin_password is defined and admin_password == 'random'
+- name: save the random password on file
+  copy:
+    content: '{{ rstudio_user_password }}'
+    dest: /home/{{ username }}/pssw.txt
+  become: yes
+  become_user: "{{ username }}"
+  no_log: True
+  when: user_password is defined and user_password == 'random'
 
 - name: create user directory for rstudio-packages
   file:
