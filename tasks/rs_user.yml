@@ -1,37 +1,32 @@
 ---
-
-- name: Create rstudio user random password
+- name: Get user password extenrally (e.g. from Vault) if available
   set_fact:
-    rstudio_admin_password: "{{ lookup('password', '/dev/null length=8') }}"
+    rstudio_user_password: '{{ user_password }}'
   no_log: True
-  when: not retrieve_passphrase_from_vault
+  when: user_password is defined
 
-- name: create rstudio user and set rstudio pssword
+    #- name: Alternatively create rstudio user random pasexternally.
+    #  set_fact:
+    #    rstudio_admin_password: "{{ lookup('password', '/dev/null length=10') }}"
+    #  no_log: True
+    #  when: admin_password is defined and admin_password == 'random'
+
+- name: Create rstudio user and set rstudio pssword
   user: 
     name: "{{ username }}"
+    password: "{{ rstudio_user_password | string | password_hash('sha512') }}"
     state: present
-    password: "{{ rstudio_admin_password | string | password_hash('sha512') }}"
     update_password: on_create
   no_log: True
-  when: not retrieve_passphrase_from_vault
 
-- name: save password on file
-  copy:
-    content: '{{ rstudio_admin_password }}'
-    dest: /home/{{ username }}/pssw.txt
-  become: yes
-  become_user: "{{ username }}"
-  no_log: True
-  when: not retrieve_passphrase_from_vault
-
-- name: create rstudio user and set rstudio password from Vault
-  user:
-    name: "{{ username }}"
-    state: present
-    password: "{{ vault_secrets.data.admin_password | string | password_hash('sha512') }}"
-    update_password: on_create
-  no_log: True
-  when: retrieve_passphrase_from_vault
+    #- name: save the random password on file
+    #  copy:
+    #    content: '{{ rstudio_admin_password }}'
+    #    dest: /home/{{ username }}/pssw.txt
+    #  become: yes
+    #  become_user: "{{ username }}"
+    #  no_log: True
+    #  when: admin_password is defined and admin_password == 'random'
 
 - name: create user directory for rstudio-packages
   file:

@@ -1,6 +1,7 @@
 ---
 # defaults file for rstudio-server-seurat
 username: studio
+user_password: changeit
 
 # set to true to install Seurat package
 install_Seu: false
