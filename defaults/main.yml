@@ -9,6 +9,10 @@ install_Seu: false
 rstudio_port: 8080
 R_VERSION: 4.4.1 
 
+# RStudio
+rstudio_version: 'rstudio-server-rhel-2025.09.2-418-x86_64'
+rstudio_url: 'https://download2.rstudio.org/server/rhel9/x86_64/{{ rstudio_version }}.rpm'
+
 role_debug: false
 
 retrieve_passphrase_from_vault: false

@@ -1,12 +1,12 @@
 ---
 - name: download rstudio-server rpm package
   get_url: 
-    url: https://download2.rstudio.org/server/rhel9/x86_64/rstudio-server-rhel-2024.04.2-764-x86_64.rpm
-    dest: /opt/rstudio-server-rhel-2024.04.2-764-x86_64.rpm
+    url: '{{ rstudio_url ·}}'
+    dest: '/opt/{{ rstudio_version }}.rpm'
 
 - name: install rstudio-server package
   dnf:
-    name: /opt/rstudio-server-rhel-2024.04.2-764-x86_64.rpm
+    name: '/opt/{{ rstudio_version }}.rpm'
     disable_gpg_check: yes
     state: present
 

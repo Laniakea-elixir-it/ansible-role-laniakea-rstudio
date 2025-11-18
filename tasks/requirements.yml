@@ -1,6 +1,6 @@
 ---
 - name: Install Packages for Rocky Linux
-  dnf:
+  package:
     name:
       - langpacks-en
       - glibc-all-langpacks
