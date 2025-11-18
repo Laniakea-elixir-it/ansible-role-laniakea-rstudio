@@ -1,7 +1,7 @@
 ---
 - name: download rstudio-server rpm package
   get_url: 
-    url: '{{ rstudio_url ·}}'
+    url: '{{ rstudio_url }}'
     dest: '/opt/{{ rstudio_version }}.rpm'
 
 - name: install rstudio-server package
