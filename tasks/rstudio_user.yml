@@ -14,7 +14,7 @@
 - name: Create rstudio user and set rstudio password
   user: 
     name: "{{ rstudio_username }}"
-    groups: sudo
+    groups: wheel
     state: present
     password: "{{ __password__ | string | password_hash('sha512') }}"
     update_password: on_create
@@ -23,7 +23,7 @@
 - name: Save the random password on file
   copy:
     content: '{{ __password__ }}'
-    dest: /home/{{ username }}/pssw.txt
+    dest: /home/{{ rstudio_username }}/pssw.txt
     force: no
     owner: "{{ rstudio_username }}"
     group: "{{ rstudio_username }}"
