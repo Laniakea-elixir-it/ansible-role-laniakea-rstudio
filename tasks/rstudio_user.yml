@@ -2,13 +2,13 @@
 - name: Get user password externally (e.g. from Vault) if available
   set_fact:
     __password__: '{{ rstudio_password }}'
-  no_log: True
+      #no_log: True
   when: rstudio_password is defined
 
 - name: Alternatively create user random password.
   set_fact:
     __password__: "{{ lookup('password', '/dev/null length=10') }}"
-  no_log: True
+      #no_log: True
   when: rstudio_password is defined and rstudio_password == 'random'
 
 - name: Create rstudio user and set rstudio password
@@ -18,7 +18,7 @@
     state: present
     password: "{{ __password__ | string | password_hash('sha512') }}"
     update_password: on_create
-  no_log: True
+      #no_log: True
 
 - name: Save the random password on file
   copy:
