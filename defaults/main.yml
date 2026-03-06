@@ -7,10 +7,10 @@ rstudio_password: random
 install_Seu: false
 # port to expose
 rstudio_port: 8080
-R_VERSION: 4.4.1 
+R_VERSION: 4.5.2 
 
 # RStudio
-rstudio_version: 'rstudio-server-rhel-2025.09.2-418-x86_64'
+rstudio_version: 'rstudio-server-rhel-2026.01.1-403-x86_64'
 rstudio_url: 'https://download2.rstudio.org/server/rhel9/x86_64/{{ rstudio_version }}.rpm'
 
 role_debug: false
