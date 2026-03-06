@@ -1,12 +1,16 @@
 ---
 # tasks file for rstudio-server-seurat
 
-- include: requirements.yml
+- name: Create RStudio user
+  include_tasks: rstudio_user.yml
 
-- include: rs_server.yml
+- name: Install dependencies
+  include_tasks: requirements.yml
 
-- include: rs_user.yml
+- name: Install RStudio server
+  include_tasks: rstudio_server.yml
 
-- include: install_seuratpk.yml
+- name: Install Seurat if due
+  include_tasks: install_seuratpk.yml
   when: install_Seu|bool  == true
 
